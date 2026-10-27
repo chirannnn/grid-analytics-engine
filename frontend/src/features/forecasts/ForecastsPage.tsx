@@ -3,7 +3,7 @@ import { api } from '../../services/api/endpoints';
 import { useState } from 'react';
 
 export function ForecastsPage() {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   
   const { data: intervalsData, isLoading } = useQuery({
     queryKey: ['intervals', page],
