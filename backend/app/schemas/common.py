@@ -1,11 +1,11 @@
 """Common schemas."""
-from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional
+
+from pydantic import BaseModel, Field
 
 
 class ErrorResponse(BaseModel):
     """Error response."""
     error: str
-    detail: Optional[str] = None
+    detail: str | None = None
     timestamp: datetime = Field(default_factory=datetime.utcnow)

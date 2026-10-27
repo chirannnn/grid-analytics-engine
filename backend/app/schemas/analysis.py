@@ -1,7 +1,7 @@
 """Analysis schemas."""
-from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+
+from pydantic import BaseModel
 
 
 class AnalysisSummary(BaseModel):
@@ -24,8 +24,8 @@ class TimeSeriesPoint(BaseModel):
     """Time series data point."""
     delivery_start: datetime
     forecast_generation: float
-    actual_generation: Optional[float] = None
-    error: Optional[float] = None
+    actual_generation: float | None = None
+    error: float | None = None
     publish_time: datetime
 
 
@@ -72,7 +72,7 @@ class MetadataResponse(BaseModel):
     decision_cutoff: str
     timezone: str
     data_sources: dict
-    last_refresh: Optional[datetime] = None
+    last_refresh: datetime | None = None
     cache_status: str
     units: str = "MW"
     assumptions: list[str]
