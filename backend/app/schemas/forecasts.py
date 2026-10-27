@@ -1,7 +1,7 @@
 """Forecast schemas."""
-from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional
+
+from pydantic import BaseModel
 
 
 class ForecastRecord(BaseModel):
@@ -9,22 +9,22 @@ class ForecastRecord(BaseModel):
     delivery_start: datetime
     publish_time: datetime
     forecast_generation: float
-    actual_generation: Optional[float] = None
-    forecast_lead_hours: Optional[float] = None
-    error: Optional[float] = None
-    abs_error: Optional[float] = None
+    actual_generation: float | None = None
+    forecast_lead_hours: float | None = None
+    error: float | None = None
+    abs_error: float | None = None
 
 
 class LatestForecastResponse(BaseModel):
     """Latest eligible forecast response."""
     delivery_start: datetime
-    delivery_end: Optional[datetime] = None
+    delivery_end: datetime | None = None
     publish_time: datetime
     forecast_generation: float
-    actual_generation: Optional[float] = None
+    actual_generation: float | None = None
     forecast_lead_hours: float
-    error: Optional[float] = None
-    abs_error: Optional[float] = None
+    error: float | None = None
+    abs_error: float | None = None
     selected_at_decision_time: bool = True
     cutoff_time: datetime
 
@@ -33,9 +33,9 @@ class ForecastInterval(BaseModel):
     """Forecast interval with all publications."""
     delivery_start: datetime
     publications: list[ForecastRecord]
-    selected_forecast: Optional[ForecastRecord] = None
+    selected_forecast: ForecastRecord | None = None
     has_actual: bool = False
-    actual_generation: Optional[float] = None
+    actual_generation: float | None = None
 
 
 class IntervalsResponse(BaseModel):
