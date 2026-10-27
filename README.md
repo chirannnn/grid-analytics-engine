@@ -68,7 +68,7 @@ graph TD
 docker compose up --build
 
 # Access the application
-# Frontend: http://localhost
+# Frontend: http://localhost:8080
 # Backend API: http://localhost:8000
 # API Docs: http://localhost:8000/docs
 ```
