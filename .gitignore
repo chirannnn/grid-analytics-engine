@@ -80,3 +80,5 @@ htmlcov/
 secrets/
 credentials.json
 service-account.json
+
+.env
