@@ -313,6 +313,12 @@ async def refresh_data():
     return {"status": "started", "message": "Data refresh initiated"}
 
 
+@app.get("/v1/models")
+async def models():
+    """Models endpoint (for compatibility)."""
+    return {"data": [], "object": "list"}
+
+
 @app.get("/")
 async def root():
     """Root endpoint."""
