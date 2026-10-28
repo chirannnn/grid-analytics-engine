@@ -1,7 +1,7 @@
 """Elexon API response models."""
-from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+
+from pydantic import BaseModel
 
 
 class FuelHHRecord(BaseModel):
@@ -22,12 +22,12 @@ class WindForRecord(BaseModel):
     settlementDate: str
     settlementPeriod: int
     generation: float
-    borderFrom: Optional[str] = None
-    borderTo: Optional[str] = None
-    scenario: Optional[str] = None
+    borderFrom: str | None = None
+    borderTo: str | None = None
+    scenario: str | None = None
 
 
 class ElexonResponse(BaseModel):
     """Generic Elexon API response."""
     data: list[dict]
-    metadata: Optional[dict] = None
+    metadata: dict | None = None

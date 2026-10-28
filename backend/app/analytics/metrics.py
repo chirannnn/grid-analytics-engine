@@ -1,9 +1,9 @@
 """Forecast accuracy metrics."""
 import math
-from typing import List, Dict, Any, Optional
+from typing import Any
 
 
-def calculate_mae(forecast_actual_pairs: List[Dict[str, Any]]) -> float:
+def calculate_mae(forecast_actual_pairs: list[dict[str, Any]]) -> float:
     """Calculate Mean Absolute Error."""
     if not forecast_actual_pairs:
         return 0.0
@@ -11,7 +11,7 @@ def calculate_mae(forecast_actual_pairs: List[Dict[str, Any]]) -> float:
     return total_abs_error / len(forecast_actual_pairs)
 
 
-def calculate_rmse(forecast_actual_pairs: List[Dict[str, Any]]) -> float:
+def calculate_rmse(forecast_actual_pairs: list[dict[str, Any]]) -> float:
     """Calculate Root Mean Squared Error."""
     if not forecast_actual_pairs:
         return 0.0
@@ -20,7 +20,7 @@ def calculate_rmse(forecast_actual_pairs: List[Dict[str, Any]]) -> float:
     return math.sqrt(mse)
 
 
-def calculate_bias(forecast_actual_pairs: List[Dict[str, Any]]) -> float:
+def calculate_bias(forecast_actual_pairs: list[dict[str, Any]]) -> float:
     """Calculate Mean Bias Error (signed error). Positive means overforecasting."""
     if not forecast_actual_pairs:
         return 0.0
@@ -35,7 +35,7 @@ def calculate_coverage(matched: int, expected: int) -> float:
     return matched / expected
 
 
-def calculate_summary_metrics(evaluated_intervals: List[Dict[str, Any]]) -> Dict[str, Any]:
+def calculate_summary_metrics(evaluated_intervals: list[dict[str, Any]]) -> dict[str, Any]:
     """Calculate all summary metrics from evaluated intervals."""
     # Filter for matched pairs with actuals
     matched_pairs = []
@@ -45,18 +45,18 @@ def calculate_summary_metrics(evaluated_intervals: List[Dict[str, Any]]) -> Dict
                 "forecast": float(interval["forecast"]),
                 "actual": float(interval["actual"])
             })
-    
+
     matched_count = len(matched_pairs)
     expected_count = len([i for i in evaluated_intervals if i.get("expected", True)])
-    
+
     mae = calculate_mae(matched_pairs)
     rmse = calculate_rmse(matched_pairs)
     bias = calculate_bias(matched_pairs)
     coverage = calculate_coverage(matched_count, expected_count)
-    
+
     total_forecast = sum(p["forecast"] for p in matched_pairs) if matched_pairs else 0.0
     total_actual = sum(p["actual"] for p in matched_pairs) if matched_pairs else 0.0
-    
+
     return {
         "mae": round(mae, 3),
         "rmse": round(rmse, 3),
